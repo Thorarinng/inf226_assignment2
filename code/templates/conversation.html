@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>INF226 Tiny Login</title>
+
+    <!-- <script src="{{url_for('static', filename='js/script.js')}}"></script> -->
+  </head>
+  <body>
+    {% include 'nav.html' %} {% include 'flash.html' %}
+    <!-- Flash source:  https://stackoverflow.com/questions/40949746/how-to-display-flashing-message-without-reloading-the-page-in-flask -->
+    <h2>
+      Conversation with: {{other_user.username }} with id: {{other_user.id}}
+    </h2>
+    <div>
+      {%for message in conversation %} {{message.timestamp}} - From Id:
+      {{message.sender_id}}: {{message.text}}
+      <br />{%endfor%}
+    </div>
+    <div>
+      <form action="" method="post">
+        <dl>
+          {{ form.csrf_token }}
+
+          <dt>Reply:</dt>
+          <dd>{{ form.text }}</dd>
+        </dl>
+
+        <p>
+          <input type="submit" value="Send message" />
+          <input type="hidden" value="{{ next or '' }}" name="next" />
+        </p>
+      </form>
+    </div>
+  </body>
+</html>

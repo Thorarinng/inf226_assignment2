@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>INF226 Tiny Login</title>
+  </head>
+
+  <body>
+    {% include 'nav.html' %} 
+      <form action="" method="post">
+        <dl>
+          {{ form.csrf_token }}
+
+          <dt>Username:</dt>
+          <dd>{{ form.username }}</dd>
+          <dt>Password:</dt>
+          <dd>{{ form.password }}</dd>
+        </dl>
+        {% include 'flash.html' %}
+
+        <p>
+          <input type="submit" value="Login" />
+          <input type="hidden" value="{{ next or '' }}" name="next" />
+        </p>
+      </form>
+
+    </div>
+  </body>
+</html>

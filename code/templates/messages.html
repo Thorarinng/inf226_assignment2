@@ -1,0 +1,66 @@
+<!-- <!DOCTYPE html>
+<html>
+  <head>
+    <title>INF226 Tiny Login</title>
+    <link rel="stylesheet" href="highlight.css" />
+    <link rel="icon" href="favicon.png" type="image/png" />
+
+    <script src="{{url_for('static', filename='js/getMessages.js')}}"></script>
+    <!-- <script src="{{url_for('static', filename='js/postMessage.js')}}"></script> -->
+  </head>
+  <body>
+  </body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>INF226 Tiny Login</title>
+
+    <!-- <script src="{{url_for('static', filename='js/script.js')}}"></script> -->
+  </head>
+  <body>
+    {% include 'nav.html' %}
+    <!-- Flash source:  https://stackoverflow.com/questions/40949746/how-to-display-flashing-message-without-reloading-the-page-in-flask -->
+
+    <div>
+      <h2> Send new message to a user</h2>
+      <form action="" method="post">
+        <dl>
+          {{ form.csrf_token }}
+
+          <dt>Username:</dt>
+          <dd>{{ form.receiver }}</dd>
+          <dt>Message:</dt>
+          <dd>{{ form.text }}</dd>
+        </dl>
+      {% include 'form_errors.html' %}
+      {% include 'flash.html' %}
+
+
+
+        <p>
+          <input type="submit" value="Send message" />
+          <input type="hidden" value="{{ next or '' }}" name="next" />
+        </p>
+      </form>    
+
+    </div>
+    <div>
+      <h2> Message History </h2>
+      <div>Message_id - msg - sender_id - receiver_id - timestamp</div>
+      <br />
+      <div id="messages">
+        {%for msg in messages %}
+          {% if current_user.id == msg.sender_id %}
+            <a href=messages/from/{{msg.receiver_id}}>Message Id: {{msg.id}} - Sender Id: {{msg.sender_id}} - Receiver Id:{{msg.receiver_id}} - Text: {{msg.text}} - Timestamp: {{msg.timestamp}}</a>
+          {% else %}
+            <a href=messages/from/{{msg.sender_id}}>Message Id: {{msg.id}} - Sender Id: {{msg.sender_id}} - Receiver Id:{{msg.receiver_id}} - Text: {{msg.text}} - Timestamp: {{msg.timestamp}}</a>
+          {%endif %}
+        <br />
+        {%endfor%}
+      </div>
+    </div>
+  </body>
+</html>

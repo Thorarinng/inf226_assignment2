@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>INF226 Tiny Login</title>
+  </head>
+
+  <body>
+    {% include 'nav.html' %} {% include 'flash.html' %}
+    <div id="page">
+      <form action="" method="post">
+        {{ form.csrf_token }}
+        <p>
+          <input type="submit" value="Logout" />
+          <input type="hidden" value="{{ next or '' }}" name="next" />
+        </p>
+      </form>
+    </div>
+  </body>
+</html>
